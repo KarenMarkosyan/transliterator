@@ -1,6 +1,9 @@
 #include <QString>
 #include <QHash>
 #include <QList>
+#include <QFile>
+#include <QStringList>
+
 #pragma once
 
 /*!
@@ -33,14 +36,14 @@ struct Word{
  * \param text - Считаный текс.
  * \return - Успешность операции.
  */
-bool readText ( const QString &fileName, const QString &text );
+bool readText ( const QString &fileName, QString &text );
 /*!
  * \brief readRules - Считывает набор правил из файла.
  * \param fileName - Имя файла из которого происходит считывание.
  * \param rules - Контейнер для правил.
  * \return - Успешность операции.
  */
-bool readRules ( const QString &fileName, const RulesMap &rules );
+bool readRules ( const QString &fileName, RulesMap &rules );
 
 RulesMap createRulesMap(const QString &s);
 /*!
