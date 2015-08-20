@@ -15,7 +15,6 @@ void testIsCorrectText::test_data()
 
 void testIsCorrectText::test()
 {
-
     QFETCH(QString, text);
     QFETCH(bool, result);
     QVERIFY2(result == isCorrectText(text), "TEST FAILD!");

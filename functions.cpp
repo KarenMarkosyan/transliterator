@@ -41,7 +41,14 @@ bool readRules(const QString &fileName, RulesMap &rules)
 
 bool isCorrectText(const QString &text)
 {
-
+    for (QString::const_iterator i = text.constBegin(); i != text.constEnd(); ++i){
+        if (i->isLetter()){
+            if (!((*i >= 'a' && *i <= 'z') || (*i >= 'A' && *i <= 'Z'))){
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 
