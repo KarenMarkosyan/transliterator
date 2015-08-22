@@ -54,7 +54,32 @@ bool isCorrectText(const QString &text)
 
 bool isCorrectRules(const RulesMap &rules)
 {
-
+    QString key, val;
+    for (RulesMap::const_iterator i = rules.constBegin(); i != rules.constEnd(); ++i){
+        key = i.key();
+        val = i.value();
+        for (QString::const_iterator j = key.constBegin(); j != key.constEnd(); ++j){
+            if (j->isLetter()||*j == '`'){
+                if (!((*j >= QChar('a') && *j <= QChar('z')) || *j == '`' || (*j >= QChar('A') && *j <= QChar('Z')))){
+                    return false;
+                }
+            }
+            else{
+                return false;
+            }
+        }
+        for (QString::const_iterator j = val.constBegin(); j != val.constEnd(); ++j){
+            if (j->isLetter()){
+                if (!((*j >= QChar(1040) && *j <= (1105)))){
+                    return false;
+                }
+            }
+            else{
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 
@@ -88,7 +113,20 @@ bool writeTexts(const QString &fileName, const QList<QString> &texts)
 }
 
 
-RulesMap createRulesMap(const QString &s)
+RulesMap createRulesMap(const QStringList &s)
 {
-
+    RulesMap rules;
+    QString val, key;
+    QStringList textInList = s;
+    for (QStringList::iterator i = textInList.begin(); i != textInList.end(); ++i){ // Пребераем текст построчно
+        if (i->contains(' ')){
+            val = i->mid(0, i->indexOf(" "));
+            key = i->mid(i->indexOf(" ")+1);
+            rules.insert(key, val);
+        }
+        else if(*i != "\n"){
+            return RulesMap();
+        }
+    }
+    return rules;
 }

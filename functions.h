@@ -45,7 +45,7 @@ bool readText ( const QString &fileName, QString &text );
  */
 bool readRules ( const QString &fileName, RulesMap &rules );
 
-RulesMap createRulesMap(const QString &s);
+RulesMap createRulesMap(const QStringList &s);
 /*!
  * \brief isCorrectText - Проверяет состоили введенный текст из корректного набора символов (буквы текста только английские).
  * \param text - Проверяемый текст
