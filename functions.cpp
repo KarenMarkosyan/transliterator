@@ -85,7 +85,31 @@ bool isCorrectRules(const RulesMap &rules)
 
 int textToWords(const QString &text, QList<Word> &words)
 {
-
+    Word w;
+    bool isWord = false;
+    for(int i = 0; i < text.length(); ++i ){
+        if (isWord) {
+            if (text[i].isLetter() || text[i] == '`'){
+                w.original.append(text[i]);
+            }
+            else{
+                words.append(w);
+                w.original.clear();
+                isWord = false;
+            }
+        }
+        else{
+            if (text[i].isLetter() || text[i] == '`'){
+                w.position = i;
+                w.original.append(text[i]);
+                isWord = true;
+            }
+        }
+    }
+    if (isWord){
+        words.append(w);
+    }
+    return words.count();
 }
 
 

@@ -16,8 +16,11 @@ void testTextToWords::test_data()
     word.original = "This";
     word.position = 2;
     words->append(word);
-    word.original = "i23s";
+    word.original = "i";
     word.position = 7;
+    words->append(word);
+    word.original = "s";
+    word.position = 10;
     words->append(word);
     word.original = "just";
     word.position = 12;
@@ -40,13 +43,13 @@ void testTextToWords::test_data()
     QTest::newRow("wordsspaces") << "$%This i23s just a letter\nIt means nothing$%^" << (void*)words;
 
     words = new QList<Word>;
-    word.original = "Thisi23sjustaletter";
+    word.original = "Thisisjustaletter";
     word.position = 0;
     words->append(word);
     word.original = "Itmeansnothing";
-    word.position = 20;
+    word.position = 18;
     words->append(word);
-    QTest::newRow("words") << "Thisi23sjustaletter\nItmeansnothing" << (void*)words;
+    QTest::newRow("words") << "Thisisjustaletter\nItmeansnothing" << (void*)words;
 
     words = new QList<Word>;
     QTest::newRow("spaces") << "!@#$%^&*(\n><?/.,’;" << (void*)words;
