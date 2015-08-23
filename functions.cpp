@@ -180,13 +180,24 @@ void analyze(Word &word, const RulesMap &rules, QString bufer, int start, int le
 
 void analyzeAllWords(QList<Word> &words, const RulesMap &rules)
 {
-
+    for (QList<Word>::iterator i = words.begin(); i != words.end(); ++i)
+        analyze(*i, rules);
 }
 
 
 bool writeTexts(const QString &fileName, const QList<QString> &texts)
 {
-
+    QFile file(fileName);
+    if (file.open(QIODevice::WriteOnly)){
+        QTextStream output(&file);
+        output << "Количество вариантов перевода: " + QString::number(texts.count());
+        for (int i = texts.constBegin(); i < texts.length(); ++i){
+            output << "\nПеревод №" + QString::number(i+1) + "\n------------------------------------------------------------\n"
+                   << texts[i];
+        }
+        return true;
+    }
+    return false;
 }
 
 
