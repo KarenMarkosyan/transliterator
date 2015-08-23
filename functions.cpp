@@ -21,19 +21,12 @@ bool readRules(const QString &fileName, RulesMap &rules)
     QString key, val;
     if (file.open(QIODevice::ReadOnly)){
         text = file.readAll();
-        textInList = text.split("\n");
-        for (QStringList::iterator i = textInList.begin(); i != textInList.end(); ++i){ // ╧ЁхсхЁрхь ЄхъёЄ яюёЄЁюўэю
-            if (i->contains(" ")){
-                val = i->mid(0, i->indexOf(" "));
-                key = i->mid(i->indexOf(" ")+1);
-                rules.insert(key, val);
-            }
-            else{
-                return false;
-            }
-        }
-        file.close();
-        return true;
+        if (text.indexOf('\r'))
+            textInList = text.split("\r\n");
+        else
+            textInList = text.split("\n");
+        rules = createRulesMap(textInList);
+        return !rules.isEmpty();
     }
     return false;
 }
@@ -191,7 +184,7 @@ bool writeTexts(const QString &fileName, const QList<QString> &texts)
     if (file.open(QIODevice::WriteOnly)){
         QTextStream output(&file);
         output << "Количество вариантов перевода: " + QString::number(texts.count());
-        for (int i = texts.constBegin(); i < texts.length(); ++i){
+        for (int i = 0; i < texts.length(); ++i){
             output << "\nПеревод №" + QString::number(i+1) + "\n------------------------------------------------------------\n"
                    << texts[i];
         }

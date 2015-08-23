@@ -2,6 +2,7 @@
 #include <QHash>
 #include <QList>
 #include <QFile>
+#include <QTextStream>
 #include <QStringList>
 
 #pragma once
