@@ -83,7 +83,7 @@ bool isCorrectRules ( const RulesMap &rules );
   * \param start - Начало анализа слова.
   * \param end - конец анализа (-1 - до конца).
   */
- void analyze(Word& word, const RulesMap &rules, QString bufer = QString(), int start = 0, int end = -1);
+ void analyze(Word& word, const RulesMap &rules, QString bufer = QString(), int start = 0, int len = 1);
  /*!
   * \brief analyzeAllWords - Перевести все слова из списка всеми возможными способами
   * \param words - Список слов

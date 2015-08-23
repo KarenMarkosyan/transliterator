@@ -15,7 +15,7 @@ void testAnalyze::test_data()
     res->original = "this";
     res->position = 0;
     res->translations<< "тхис" << "тх?" << "т?с" << "т?" << "?ис" << "??" << "?с" << "?";
-    rulesList<< "a а"
+    rulesList<< "а a"
              << "б b"
              << "в v"
              << "г g"
@@ -59,20 +59,19 @@ void testAnalyze::test_data()
     res->position = 0;
     res->translations<< "?а??" << "?а?" << "???" << "??" << "???" << "??" << "??" << "?";
     rulesList.clear();
-    rulesList << "a аb"
-              << "б bc"
-              << "в cd"
-              << "г abc";
+    rulesList << "а a"
+              << "б b";
     QTest::newRow("manyTranslates") << rulesList << (void*)res;
 
     res = new Word;
     res->original = "abcd";
     res->position = 0;
-    res->translations<< "?а??" << "????" << "??в" << "?б?" << "??" << "а??" << "ав" << "г?" << "?";
+    res->translations << "????" << "??в" << "?б?" << "??" << "а??" << "ав" << "г?" << "?";
     rulesList.clear();
-    rulesList << "a а"
-              << "б b";
-
+    rulesList << "а ab"
+              << "б bc"
+              << "в cd"
+              << "г abc";
     QTest::newRow("manyTranslates") << rulesList
                                     << (void*)res;
 }

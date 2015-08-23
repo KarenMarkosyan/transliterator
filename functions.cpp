@@ -153,9 +153,28 @@ int wordsToTexts(const QString &text, const QList<Word> words, QList<QString> &t
 }
 
 
-void analyze(Word &word, const RulesMap &rules, QString bufer, int start, int end)
+void analyze(Word &word, const RulesMap &rules, QString bufer, int start, int len)
 {
+    QString translition;
+    QString translatablePart = word.original.mid(start, len);
 
+    for (RulesMap::const_iterator i = rules.constBegin(); i != rules.constEnd() && translition.isEmpty(); ++i){
+        if (translatablePart.toLower() == i.key().toLower()){
+            translition = i.value();
+        }
+    }
+    if (translition.isEmpty()){
+        translition = "?";
+    }
+    bufer += translition;
+    if (word.original.length() == start + len){
+        word.translations.append(bufer);
+        bufer.clear();
+    }
+    else{
+        analyze(word, rules, bufer, start + len, 1);
+        analyze(word, rules, bufer.mid(0, bufer.length() - translition.length()), start, len + 1);
+    }
 }
 
 
