@@ -22,7 +22,7 @@ bool readRules(const QString &fileName, RulesMap &rules)
     if (file.open(QIODevice::ReadOnly)){
         text = file.readAll();
         textInList = text.split("\n");
-        for (QStringList::iterator i = textInList.begin(); i != textInList.end(); ++i){ // Пребераем текст построчно
+        for (QStringList::iterator i = textInList.begin(); i != textInList.end(); ++i){ // ╧ЁхсхЁрхь ЄхъёЄ яюёЄЁюўэю
             if (i->contains(" ")){
                 val = i->mid(0, i->indexOf(" "));
                 key = i->mid(i->indexOf(" ")+1);
@@ -115,7 +115,41 @@ int textToWords(const QString &text, QList<Word> &words)
 
 int wordsToTexts(const QString &text, const QList<Word> words, QList<QString> &texts)
 {
-
+    if (words.isEmpty()){
+        texts.clear();
+        texts.append(text);
+        return 1;
+    }
+    QString spaser;
+    QList<QString> tmpText;
+    bool haveGoodTranslition = true, haveLocalGoodTranslition = false;
+    for (int i = 0; i < words.length(); ++i){
+        for (int j = 0; j < words[i].translations.length(); ++j){
+            haveLocalGoodTranslition = haveLocalGoodTranslition || !words[i].translations[j].contains('?');
+        }
+        haveGoodTranslition &= haveLocalGoodTranslition;
+        haveLocalGoodTranslition = false;
+    }
+    texts.clear();
+    texts.append("");
+    for (int i = 0; i < words.length(); ++i){
+        int startSpaser = words[i].position + words[i].original.length();
+        int endSpaser = -1;
+        if (i != words.length() - 1){
+            endSpaser = words[i+1].position - startSpaser;
+        }
+        spaser = text.mid(startSpaser, endSpaser);
+        for (int j = 0; j < words[i].translations.length(); ++j){
+            if (!haveGoodTranslition || !words[i].translations[j].contains('?')){
+                for (int k = 0; k < texts.length(); ++k){
+                    tmpText.append(texts[k] + words[i].translations[j] + spaser);
+                }
+            }
+        }
+        texts = tmpText;
+        tmpText.clear();
+    }
+    return texts.length();
 }
 
 
@@ -142,7 +176,7 @@ RulesMap createRulesMap(const QStringList &s)
     RulesMap rules;
     QString val, key;
     QStringList textInList = s;
-    for (QStringList::iterator i = textInList.begin(); i != textInList.end(); ++i){ // Пребераем текст построчно
+    for (QStringList::iterator i = textInList.begin(); i != textInList.end(); ++i){ // ╧ЁхсхЁрхь ЄхъёЄ яюёЄЁюўэю
         if (i->contains(' ')){
             val = i->mid(0, i->indexOf(" "));
             key = i->mid(i->indexOf(" ")+1);

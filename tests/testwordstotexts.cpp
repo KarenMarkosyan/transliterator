@@ -31,12 +31,12 @@ void testWordsToTexts::test_data()
     w.translations.clear();
 
     resTexts->append("вис ис Спарта!");
-    resTexts->append("вис ис спарта!");
-    resTexts->append("вис из Спарта!");
-    resTexts->append("Вис из спарта!");
     resTexts->append("Вис ис Спарта!");
-    resTexts->append("Вис ис спарта!");
+    resTexts->append("вис из Спарта!");
     resTexts->append("Вис из Спарта!");
+    resTexts->append("вис ис спарта!");
+    resTexts->append("Вис ис спарта!");
+    resTexts->append("вис из спарта!");
     resTexts->append("Вис из спарта!");
     QTest::newRow("oneStringOnlyLetters") << "This is Sparta!" << (void*)wordList << (void*)resTexts;
     //-----------------------------
@@ -60,12 +60,12 @@ void testWordsToTexts::test_data()
 
 
     resTexts->append("вис ис\nСпарта!");
-    resTexts->append("вис ис\nспарта!");
+    resTexts->append("Вис ис\nСпарта!");
     resTexts->append("вис из\nСпарта!");
-    resTexts->append("Вис из\nспарта!");
-    resTexts->append( "Вис ис\nСпарта!");
-    resTexts->append("Вис ис\nспарта!");
     resTexts->append("Вис из\nСпарта!");
+    resTexts->append("вис ис\nспарта!");
+    resTexts->append("Вис ис\nспарта!");
+    resTexts->append("вис из\nспарта!");
     resTexts->append("Вис из\nспарта!");
     QTest::newRow("someString") << "This is\nSparta!" << (void*)wordList << (void*)resTexts;
     //-------------------------------
@@ -88,12 +88,12 @@ void testWordsToTexts::test_data()
     w.translations.clear();
 
     resTexts->append("вис ис\nСпарта!");
-    resTexts->append("вис ис\nспарта!");
-    resTexts->append("вис из\nСпарта!");
-    resTexts->append("Вис из\nспарта!");
     resTexts->append("Вис ис\nСпарта!");
-    resTexts->append("Вис ис\nспарта!");
+    resTexts->append("вис из\nСпарта!");
     resTexts->append("Вис из\nСпарта!");
+    resTexts->append("вис ис\nспарта!");
+    resTexts->append("Вис ис\nспарта!");
+    resTexts->append("вис из\nспарта!");
     resTexts->append("Вис из\nспарта!");
     QTest::newRow("someString") << "This is\nSparta!" << (void*)wordList << (void*)resTexts;
     //---------------------------------
@@ -117,8 +117,8 @@ void testWordsToTexts::test_data()
 
 
     resTexts->append("вис из\nСпарта!");
-    resTexts->append("Вис из\nспарта!");
     resTexts->append("Вис из\nСпарта!");
+    resTexts->append("вис из\nспарта!");
     resTexts->append("Вис из\nспарта!");
     QTest::newRow("someString") << "This is\nSparta!" << (void*)wordList << (void*)resTexts;
     //-------------------------------
@@ -142,8 +142,8 @@ void testWordsToTexts::test_data()
 
 
     resTexts->append("вис из Спарта!");
-    resTexts->append("Вис из спарта!");
     resTexts->append("Вис из Спарта!");
+    resTexts->append("вис из спарта!");
     resTexts->append("Вис из спарта!");
     QTest::newRow("oneStringAndHaveWrongWords ") << "This is Sparta!" << (void*)wordList << (void*)resTexts;
     //--------------------------------
@@ -166,8 +166,8 @@ void testWordsToTexts::test_data()
     w.translations.clear();
 
     resTexts->append("вис ?? Спарта!");
-    resTexts->append("Вис ?? спарта!");
     resTexts->append("Вис ?? Спарта!");
+    resTexts->append("вис ?? спарта!");
     resTexts->append("Вис ?? спарта!");
     QTest::newRow("haveNotTranslitWithoutWrongWords") << "This is Sparta!" << (void*)wordList << (void*)resTexts;
     //-----------------------------------
@@ -186,7 +186,7 @@ void testWordsToTexts::test_data()
     wordList = new QList<Word>;
 
     resTexts->append("@#$%^&*");
-    QTest::newRow("oneStringSpaces") << "“@#$%^&*”" << (void*)wordList << (void*)resTexts;
+    QTest::newRow("oneStringSpaces") << "@#$%^&*" << (void*)wordList << (void*)resTexts;
 }
 
 void testWordsToTexts::test()
@@ -200,7 +200,12 @@ void testWordsToTexts::test()
     QStringList rT = *(QStringList*)resTexts;
     delete (QStringList*)resTexts;
     QStringList res;
-    wordsToTexts(text, wL, res);
-    QVERIFY2(res == rT, "INVALID RESULT");
+    if (rT.length() == wordsToTexts(text, wL, res)){
+        for (int i = 0; i < res.length(); ++i)
+            QVERIFY2(res[i] == rT[i], QString("INVALID VALUE:" + QString::number(i)).toStdString().c_str());
+    }
+    else{
+        QVERIFY2(false, "INVALID COUNT");
+    }
 }
 
