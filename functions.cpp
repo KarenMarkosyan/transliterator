@@ -106,23 +106,18 @@ int textToWords(const QString &text, QList<Word> &words)
 }
 
 
-int wordsToTexts(const QString &text, const QList<Word> words, QList<QString> &texts)
+int wordsToTexts(const QString &text, const QList<Word> &words, QList<QString> &texts)
 {
     if (words.isEmpty()){
         texts.clear();
         texts.append(text);
         return 1;
     }
+    int count = 0;
+    int defCount = 0;
+    int itCount = 0;
     QString spaser;
-    QList<QString> tmpText;
-    bool haveGoodTranslition = true, haveLocalGoodTranslition = false;
-    for (int i = 0; i < words.length(); ++i){
-        for (int j = 0; j < words[i].translations.length(); ++j){
-            haveLocalGoodTranslition = haveLocalGoodTranslition || !words[i].translations[j].contains('?');
-        }
-        haveGoodTranslition &= haveLocalGoodTranslition;
-        haveLocalGoodTranslition = false;
-    }
+    bool haveGoodTranslitionText = haveGoodTranslition(words);
     texts.clear();
     texts.append("");
     for (int i = 0; i < words.length(); ++i){
@@ -132,15 +127,20 @@ int wordsToTexts(const QString &text, const QList<Word> words, QList<QString> &t
             endSpaser = words[i+1].position - startSpaser;
         }
         spaser = text.mid(startSpaser, endSpaser);
-        for (int j = 0; j < words[i].translations.length(); ++j){
-            if (!haveGoodTranslition || !words[i].translations[j].contains('?')){
-                for (int k = 0; k < texts.length(); ++k){
-                    tmpText.append(texts[k] + words[i].translations[j] + spaser);
+        defCount = texts.length();
+        for (int k = 0; itCount < defCount ; ++k){
+            for (int j = 0; j < words[i].translations.length(); ++j){
+                if (!haveGoodTranslitionText || !words[i].translations[j].contains('?')){
+                    count++;
+                    texts.insert(k+count, texts[k] + words[i].translations[j] + spaser);
                 }
             }
+            texts.removeAt(k);
+            k+=count-1;
+            count = 0;
+            itCount++;
         }
-        texts = tmpText;
-        tmpText.clear();
+        itCount = 0;
     }
     return texts.length();
 }
@@ -162,6 +162,7 @@ void analyze(Word &word, const RulesMap &rules, QString bufer, int start, int le
     bufer += translition;
     if (word.original.length() == start + len){
         word.translations.append(bufer);
+        word.haveGoodTranslition |= (bufer.indexOf("?") == -1);
         bufer.clear();
     }
     else{
@@ -173,8 +174,10 @@ void analyze(Word &word, const RulesMap &rules, QString bufer, int start, int le
 
 void analyzeAllWords(QList<Word> &words, const RulesMap &rules)
 {
-    for (QList<Word>::iterator i = words.begin(); i != words.end(); ++i)
+    for (QList<Word>::iterator i = words.begin(); i != words.end(); ++i){
+        i->haveGoodTranslition = false;
         analyze(*i, rules);
+    }
 }
 
 
@@ -210,4 +213,14 @@ RulesMap createRulesMap(const QStringList &s)
         }
     }
     return rules;
+}
+
+
+bool haveGoodTranslition(const QList<Word> &text)
+{
+    bool res = true;
+    for (QList<Word>::const_iterator i = text.constBegin(); i != text.constEnd(); ++i){
+        res &= i->haveGoodTranslition;
+    }
+    return res;
 }

@@ -24,13 +24,20 @@ struct Word{
      * \brief positionInLine - Позиция слова в тексте.
      */
     int position;
-
+    /*!
+     * \brief haveGoodTranslition - Есть ли у слова хотябы один полный перевод
+     */
+    bool haveGoodTranslition;
     bool operator ==(const Word& other){
         return original == other.original && translations == other.translations && position == other.position;
     }
 };
-
-
+/*!
+ * \brief haveGoodTranslition - Естли полный перевод текста
+ * \param text - массив слов
+ * \return - существует ли хотябы один полный перевод текста
+ */
+bool haveGoodTranslition (const QList<Word> &text);
 /*!
  * \brief readText - Считывает текст из файла.
  * \param fileName - Имя файла из которого происходит считывание.
@@ -74,7 +81,7 @@ bool isCorrectRules ( const RulesMap &rules );
   * \param texts - Список текстов.
   * \return - Количество текстов.
   */
- int wordsToTexts( const QString &text, const QList<Word> words, QList<QString> &texts);
+ int wordsToTexts(const QString &text, const QList<Word> &words, QList<QString> &texts);
 
  /*!
   * \brief analyze - Функция получения всех переводов данного слова

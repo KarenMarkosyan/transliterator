@@ -17,16 +17,19 @@ void testWordsToTexts::test_data()
     w.original = "This";
     w.position = 0;
     w.translations << "вис" << "Вис";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
     w.original = "is";
     w.position = 5;
     w.translations << "ис" << "из";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
     w.original = "Sparta";
     w.position = 8;
     w.translations << "Спарта" << "спарта";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
 
@@ -45,16 +48,19 @@ void testWordsToTexts::test_data()
     w.original = "This";
     w.position = 0;
     w.translations << "вис" << "Вис";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
     w.original = "is";
     w.position = 5;
     w.translations << "ис" << "из";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
     w.original = "Sparta";
     w.position = 8;
     w.translations << "Спарта" << "спарта";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
 
@@ -74,16 +80,19 @@ void testWordsToTexts::test_data()
     w.original = "This";
     w.position = 0;
     w.translations << "вис" << "Вис";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
     w.original = "is";
     w.position = 5;
     w.translations << "ис" << "из";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
     w.original = "Sparta";
     w.position = 8;
     w.translations << "Спарта" << "спарта";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
 
@@ -102,16 +111,19 @@ void testWordsToTexts::test_data()
     w.original = "This";
     w.position = 0;
     w.translations << "вис" << "Вис";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
     w.original = "is";
     w.position = 5;
     w.translations << "??" << "из";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
     w.original = "Sparta";
     w.position = 8;
     w.translations << "Спарта" << "спарта";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
 
@@ -127,16 +139,19 @@ void testWordsToTexts::test_data()
     w.original = "This";
     w.position = 0;
     w.translations << "вис" << "Вис";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
     w.original = "is";
     w.position = 5;
     w.translations << "??" << "из";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
     w.original = "Sparta";
     w.position = 8;
     w.translations << "Спарта" << "спарта";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
 
@@ -152,16 +167,19 @@ void testWordsToTexts::test_data()
     w.original = "This";
     w.position = 0;
     w.translations << "вис" << "Вис";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
     w.original = "is";
     w.position = 5;
     w.translations << "??";
+    w.haveGoodTranslition = false;
     wordList->append(w);
     w.translations.clear();
     w.original = "Sparta";
     w.position = 8;
     w.translations << "Спарта" << "спарта";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
 
@@ -176,6 +194,7 @@ void testWordsToTexts::test_data()
     w.original = "This";
     w.position = 0;
     w.translations << "вис" << "?ис";
+    w.haveGoodTranslition = true;
     wordList->append(w);
     w.translations.clear();
 

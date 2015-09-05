@@ -16,19 +16,19 @@ void testig(){ // Запускает тестирования
 #include "fusion.h"
 #endif
 #include <iostream>
-int main(int argc, char *argv[])
+int main(int argc, char *argv1[])
 {
-//    char argv[4][80] = {
-//        "progName",
-//        "input.txt",
-//        "rules1.txt",
-//        "output.txt"
-//    };
+    char argv[4][80] = {
+        "progName",
+        "input.txt",
+        "rules1.txt",
+        "output.txt"
+    };
     #ifdef QT_DEBUG
-  //  testig();
+     //  testig();
     #endif
     QCoreApplication a(argc, argv1);
-    if (argc < 4){
+    if (argc > 4){
        std::cout << "Incorrect number of arguments\nIt started with standard values";
     }
     else{

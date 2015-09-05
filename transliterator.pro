@@ -13,6 +13,8 @@ CONFIG   += console
 CONFIG   -= app_bundle
 
 TEMPLATE = app
+QMAKE_CXXFLAGS_DEBUG += -pg
+QMAKE_LFLAGS_DEBUG += -pg
 
 
 SOURCES += main.cpp \
