@@ -83,6 +83,7 @@ int textToWords(const QString &text, QList<Word> &words)
 {
     Word w;
     bool isWord = false;
+    //Для каждого символа текста
     for(int i = 0; i < text.length(); ++i ){
         if (isWord) {
             if (text[i].isLetter() || text[i] == '`'){
