@@ -1,34 +1,13 @@
 #include <QCoreApplication>
-#ifdef QT_DEBUG
-#include <tests/testanalyze.h>
-#include <tests/testiscorrectrules.h>
-#include <tests/testiscorrecttext.h>
-#include <tests/testtexttowords.h>
-#include <tests/testwordstotexts.h>
-void testig(){ // Запускает тестирования
-    QTest::qExec(new testAnalyze);
-    QTest::qExec(new testIsCorrectRules);
-    QTest::qExec(new testIsCorrectText);
-    QTest::qExec(new testTextToWords);
-    QTest::qExec(new testWordsToTexts);
-}
-#else
-#include "fusion.h"
-#endif
+#include "functions.h"
 #include <iostream>
-int main(int argc, char *argv1[])
+int main(int argc, char *argv[])
 {
-    char argv[4][80] = {
-        "progName",
-        "input.txt",
-        "rules1.txt",
-        "output.txt"
-    };
     #ifdef QT_DEBUG
-     //  testig();
+    //  testig();
     #endif
-    QCoreApplication a(argc, argv1);
-    if (argc > 4){
+    QCoreApplication a(argc, argv);
+    if (argc < 4){
        std::cout << "Incorrect number of arguments\nIt started with standard values";
     }
     else{
