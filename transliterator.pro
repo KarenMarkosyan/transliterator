@@ -23,7 +23,8 @@ SOURCES += main.cpp \
     tests/testiscorrecttext.cpp \
     tests/testiscorrectrules.cpp \
     tests/testanalyze.cpp \
-    tests/testwordstotexts.cpp
+    tests/testwordstotexts.cpp \
+    inout.cpp
 
 HEADERS += \
     functions.h \
@@ -31,4 +32,6 @@ HEADERS += \
     tests/testiscorrecttext.h \
     tests/testiscorrectrules.h \
     tests/testanalyze.h \
-    tests/testwordstotexts.h
+    tests/testwordstotexts.h \
+    inout.h \
+    types.h
