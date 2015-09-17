@@ -11,6 +11,9 @@
  * \brief RulesMap - Контейнер для хранения карты правил
  */
 typedef QHash<QString, QString> RulesMap;
+/*!
+ * \brief The Word struct - описывает слово с его набором переводов
+ */
 struct Word{
     /*!
      * \brief original - Слово до перевода.
@@ -28,6 +31,11 @@ struct Word{
      * \brief haveGoodTranslition - Есть ли у слова хотябы один полный перевод
      */
     bool haveGoodTranslition;
+    /*!
+     * \brief operator == - Оператор сравнения
+     * \param other
+     * \return
+     */
     bool operator ==(const Word& other){
         return original == other.original && translations == other.translations && position == other.position;
     }
