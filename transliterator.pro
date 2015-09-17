@@ -18,20 +18,22 @@ QMAKE_LFLAGS_DEBUG += -pg
 
 
 SOURCES += main.cpp \
-    functions.cpp \
     tests/testtexttowords.cpp \
     tests/testiscorrecttext.cpp \
     tests/testiscorrectrules.cpp \
     tests/testanalyze.cpp \
     tests/testwordstotexts.cpp \
-    inout.cpp
+    inout.cpp \
+    analyze.cpp \
+    check.cpp
 
 HEADERS += \
-    functions.h \
     tests/testtexttowords.h \
     tests/testiscorrecttext.h \
     tests/testiscorrectrules.h \
     tests/testanalyze.h \
     tests/testwordstotexts.h \
     inout.h \
-    types.h
+    types.h \
+    analyze.h \
+    check.h

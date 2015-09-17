@@ -1,6 +1,7 @@
 #include <QCoreApplication>
-#include "functions.h"
+#include "analyze.h"
 #include <iostream>
+
 int main(int argc, char *argv[])
 {
     #ifdef QT_DEBUG

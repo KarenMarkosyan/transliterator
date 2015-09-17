@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QTest>
 
-#include <functions.h>
+#include <analyze.h>
 
 class testIsCorrectRules : public QObject
 {

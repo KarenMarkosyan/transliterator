@@ -5,7 +5,7 @@
 #include <QObject>
 #include <QTest>
 
-#include <functions.h>
+#include <analyze.h>
 
 class testAnalyze : public QObject
 {

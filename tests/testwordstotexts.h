@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QtTest/QTest>
 
-#include <functions.h>
+#include <analyze.h>
 class testWordsToTexts : public QObject
 {
     Q_OBJECT

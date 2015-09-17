@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QtTest/QTest>
 
-#include <functions.h>
+#include <analyze.h>
 typedef QList<Word> WordsList;
 
 class testTextToWords : public QObject

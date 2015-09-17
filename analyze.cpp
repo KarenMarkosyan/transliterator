@@ -1,3 +1,4 @@
+#include <analyze.h>
 
 void analyze(Word &word, const RulesMap &rules, QString bufer, int start, int len)
 {
